@@ -59,7 +59,7 @@ export class FormularioComponent implements ControlValueAccessor {
 
   private _onChange: (obj: FormularioComponentData) => void;
 
-  @HostListener('blur') _onTouched: () => void;
+  @HostListener('focusout') _onTouched: () => void;
 
   constructor(_fb: FormBuilder) {
     this._form = _fb.group({
