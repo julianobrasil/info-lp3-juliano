@@ -1,0 +1,33 @@
+<pre>
+  {{_form.value | json}}
+</pre>
+
+<form [formGroup]="_form">
+  <app-formulario (value)="_mostraValores($event)" [readonly]="_readonly" [nomeVisivel]="_nomeVisivel"
+    formControlName="dadosDeUsuario">
+  </app-formulario>
+</form>
+
+<button (click)="_alteraEstadoDoFormulario()">
+  {{_disabled ? 'Habilitar' : 'Desabilitar'}}</button>
+
+<button (click)="_readonly = !_readonly">
+  {{_readonly ? 'Libera escrita' : 'Somente Leitura'}}</button>
+
+<button (click)="_nomeVisivel = !_nomeVisivel">
+  {{_nomeVisivel ? 'Esconder o nome' : 'Mostrar o nome'}}</button>
+
+<button (click)="_gravarDados()">
+  Gravar dados</button>
+
+<div>
+  pristine: {{_form.get('dadosDeUsuario').pristine}}
+</div>
+<div>
+  touched: {{_form.get('dadosDeUsuario').touched}}
+</div>
+
+<div *ngIf="_usuarios?.length" class="list-container">
+  <app-lista-de-usuarios (idRemovido)="_removeUsuario($event)" [users]="_usuarios">
+  </app-lista-de-usuarios>
+</div>
