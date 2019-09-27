@@ -1,0 +1,17 @@
+<mat-card>
+  <section *ngFor="let u of users" class="linha">
+    <div class="nome">
+      {{u?.nome}}
+    </div>
+
+    <div class="idade">
+      {{u?.idade}}
+    </div>
+
+    <div class="botao">
+      <button mat-icon-button (click)="_apaga(u)">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+    </div>
+  </section>
+</mat-card>
