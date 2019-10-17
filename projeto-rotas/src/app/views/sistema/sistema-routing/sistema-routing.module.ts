@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Route} from '@angular/router';
 import {ShellComponent} from '../shell/shell.component';
 import {Link1Component} from '../link1/link1.component';
-import {Link2Component} from '../link2/link2.component';
 import {Link2Guard} from './link-2.guard';
 import {Link3Guard} from './link-3.guard';
 
@@ -17,8 +16,10 @@ const routes: Route[] = [
       },
       {
         path: 'link-2',
-        component: Link2Component,
+        loadChildren: () => import('src/app/views/link2/link2.module')
+                                .then((m) => m.Link2Module),
         canActivate: [Link2Guard],
+        canLoad: [Link2Guard],
       },
       {
         path: 'link-3',

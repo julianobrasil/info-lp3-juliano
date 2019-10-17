@@ -4,13 +4,11 @@ import {CustomMaterialModule} from './custom-material.module';
 import {ShellComponent} from './shell/shell.component';
 import {SistemaRoutingModule} from './sistema-routing/sistema-routing.module';
 import {Link1Component} from './link1/link1.component';
-import {Link2Component} from './link2/link2.component';
 
 @NgModule({
   declarations: [
     ShellComponent,
     Link1Component,
-    Link2Component,
   ],
   imports: [
     CommonModule,
