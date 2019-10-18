@@ -3,10 +3,18 @@
   flex-direction: column;
 }
 
-.example-container > * {
+.example-container>* {
   width: 100%;
 }
 
 .list-container {
   padding: 10px;
+}
+
+.container {
+  padding: 10px;
+
+  &>* {
+    margin-bottom: 20px;
+  }
 }

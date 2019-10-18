@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Output,
-  forwardRef,
-  HostListener,
-  Input,
-} from '@angular/core';
+import {Component, EventEmitter, Output, forwardRef, HostListener, Input} from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -17,7 +10,7 @@ import {
 import {fromEvent} from 'rxjs';
 
 export interface FormularioComponentData {
-  idade: number;
+  email: string;
   nome: string;
 }
 
@@ -30,12 +23,14 @@ export interface FormularioComponentData {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => FormularioComponent),
       multi: true,
-    }
+    },
   ],
 })
 export class FormularioComponent implements ControlValueAccessor {
   @Input() private _disabled: boolean;
-  get disabled() { return this._disabled; }
+  get disabled() {
+    return this._disabled;
+  }
   set disabled(disabled: boolean) {
     this._disabled = disabled;
     if (disabled) {
@@ -51,8 +46,7 @@ export class FormularioComponent implements ControlValueAccessor {
 
   /** Emite os dados do formulário */
   @Output()
-  value: EventEmitter<FormularioComponentData> =
-      new EventEmitter<FormularioComponentData>();
+  valueChanged: EventEmitter<FormularioComponentData> = new EventEmitter<FormularioComponentData>();
 
   /** Representa o formulãrio na template */
   _form: FormGroup;
@@ -64,7 +58,7 @@ export class FormularioComponent implements ControlValueAccessor {
   constructor(_fb: FormBuilder) {
     this._form = _fb.group({
       nome: ['Pedro', Validators.required],
-      idade: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
     });
 
     // Observable
@@ -80,14 +74,18 @@ export class FormularioComponent implements ControlValueAccessor {
   }
 
   /** implementação da ControlValueAccessor */
-  writeValue(obj: FormularioComponentData): void { this._form.setValue(obj); }
+  writeValue(obj: FormularioComponentData): void {
+    this._form.setValue(obj);
+  }
 
   /** implementação da ControlValueAccessor */
   registerOnChange(fn: (obj: FormularioComponentData) => void): void {
     this._onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void { this._onTouched = fn; }
+  registerOnTouched(fn: () => void): void {
+    this._onTouched = fn;
+  }
 
   setDisabledState?(isDisabled: boolean): void {
     if (isDisabled) {
@@ -110,7 +108,7 @@ export class FormularioComponent implements ControlValueAccessor {
 
     const dadosForm: FormularioComponentData = {...this._form.value};
 
-    this.value.emit(dadosForm);
+    this.valueChanged.emit(dadosForm);
 
     this._form.get('nome').setValue('aleluia');
   }
