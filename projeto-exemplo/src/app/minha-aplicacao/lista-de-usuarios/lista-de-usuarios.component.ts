@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Output, ChangeDetectionStrategy, Input } from '@angular/core';
-
-import {Usuario} from '../../services/app.service';
+import {Component, EventEmitter, Output, ChangeDetectionStrategy, Input} from '@angular/core';
+import {Usuario} from 'src/app/data-access/model';
 
 @Component({
   selector: 'app-lista-de-usuarios',
@@ -13,7 +12,7 @@ export class ListaDeUsuariosComponent {
   users: Usuario[];
 
   @Output()
-  idRemovido: EventEmitter<number> = new EventEmitter<number>();
+  idRemovido: EventEmitter<string> = new EventEmitter<string>();
 
   _apaga(u: Usuario) {
     this.idRemovido.emit(u.id);

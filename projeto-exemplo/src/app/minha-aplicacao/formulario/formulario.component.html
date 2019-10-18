@@ -1,17 +1,30 @@
 <form [formGroup]="_form">
   <section class="form-container">
 
-    <mat-form-field *ngIf="nomeVisivel" floatLabel="always">
+    <mat-form-field *ngIf="nomeVisivel"
+                    floatLabel="always">
       <mat-label>Nome</mat-label>
-      <input [readOnly]="readonly" matInput formControlName="nome" placeholder="DIGITE UM NOME" required>
+      <input [readOnly]="readonly"
+             matInput
+             formControlName="nome"
+             placeholder="DIGITE UM NOME"
+             required>
     </mat-form-field>
 
-    <mat-form-field class="idade" floatLabel="always">
-      <mat-label>Idade</mat-label>
-      <input [readOnly]="readonly" type="number" formControlName="idade" matInput required>
+    <mat-form-field class="idade"
+                    floatLabel="always">
+      <mat-label>E-mail</mat-label>
+      <input [readOnly]="readonly"
+             formControlName="email"
+             matInput
+             type="email"
+             required>
     </mat-form-field>
 
-    <button (click)="_emiteDadosDeFormulario()" [disabled]="_form.invalid" mat-raised-button color="primary">
+    <button (click)="_emiteDadosDeFormulario()"
+            [disabled]="_form.invalid"
+            mat-raised-button
+            color="primary">
       Gravar
     </button>
   </section>

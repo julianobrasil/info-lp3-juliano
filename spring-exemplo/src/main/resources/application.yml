@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://prof:abcdef12!@ds335678.mlab.com:35678/lp3?connectTimeoutMS=300000
+
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
