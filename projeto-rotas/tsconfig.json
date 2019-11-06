@@ -18,6 +18,9 @@
       "es2018",
       "dom"
     ],
+    "types": [
+      "cypress"
+    ],
     "paths": {
       "@views/administracao": ["src/app/views/administracao"]
     }
