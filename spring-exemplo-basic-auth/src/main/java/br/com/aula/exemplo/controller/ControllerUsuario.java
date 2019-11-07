@@ -27,6 +27,10 @@ public class ControllerUsuario {
 		return this.usuarioService.findAllUsuarios(nome);
 	}
 
+	@GetMapping("/authenticate")
+	public void authenticate() {
+	}
+
 	@PostMapping
 	public Usuario gravaUsuario(@RequestBody Usuario usuario) {
 
