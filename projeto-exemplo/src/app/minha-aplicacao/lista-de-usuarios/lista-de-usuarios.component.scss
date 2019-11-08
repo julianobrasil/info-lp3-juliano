@@ -17,12 +17,15 @@
     box-sizing: content-box;
   }
 
-  .botao,
-  .email {
+  .botao {
     width: 40px;
+  }
+  
+  .email {
+    flex: 1;
   }
 
   .nome {
-    flex: 1;
+    flex: 4;
   }
 }
