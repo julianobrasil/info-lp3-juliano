@@ -13,11 +13,11 @@ export class LoginComponentService {
 
   /** Valida o usuário logado e redireciona-o se for o caso */
   login(data: LoginComponentData) {
-
     this._appService.authenticate(data.username, data.password).subscribe(
-      (obj: {token: string}) => {
+      (obj: {token: string, refreshToken: string}) => {
         this._appService.isLoggedIn = true;
         this._appService.token = obj.token;
+        this._appService.refreshToken = obj.refreshToken;
         this._router.navigate(['shell']);
       },
       error => {

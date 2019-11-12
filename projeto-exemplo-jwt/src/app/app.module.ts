@@ -7,6 +7,7 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import {SecurityInterceptor} from './interceptors/security.interceptor';
+import {ErrorInterceptor} from './interceptors/error.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,15 +17,20 @@ import {SecurityInterceptor} from './interceptors/security.interceptor';
     HttpClientModule,
     ReactiveFormsModule,
 
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
+      useExisting: ErrorInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
       useExisting: SecurityInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

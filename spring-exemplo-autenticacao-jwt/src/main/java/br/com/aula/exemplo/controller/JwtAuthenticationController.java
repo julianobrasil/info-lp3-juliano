@@ -19,6 +19,7 @@ import br.com.aula.exemplo.controller.to.JwtRequest;
 import br.com.aula.exemplo.controller.to.JwtResponse;
 import br.com.aula.exemplo.core.config.jwt.JwtTokenUtil;
 import br.com.aula.exemplo.core.config.jwt.JwtUserDetailsService;
+import io.jsonwebtoken.ExpiredJwtException;
 
 @RestController
 @CrossOrigin
@@ -59,7 +60,14 @@ public class JwtAuthenticationController {
 			throw new Exception("No refresh token was found");
 		}
 
-		String username = this.jwtTokenUtil.getUsernameFromToken(token);
+		String username = null;
+		
+		try {
+			username = this.jwtTokenUtil.getUsernameFromToken(token);
+		} catch (ExpiredJwtException e) {
+			username = e.getClaims().getSubject();
+			e.printStackTrace();
+		}
 
 		if (username == null) {
 			throw new Exception("Invalid user");

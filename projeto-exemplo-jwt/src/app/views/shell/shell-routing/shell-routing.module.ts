@@ -12,9 +12,18 @@ const routes: Route[] = [
       {
         path: '',
         component: ShellComponent,
-      }
-    ]
-  }
+        children: [
+          {
+            path: 'usuario',
+            loadChildren: () =>
+              import('../../minha-aplicacao/minha-aplicacao.module').then(
+                (m) => m.MinhaAplicacaoModule
+              ),
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 @NgModule({

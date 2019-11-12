@@ -19,7 +19,7 @@ public class JwtTokenUtil implements Serializable {
 
 	private static final long serialVersionUID = -9163787328328323387L;
 
-	public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+	public static final long JWT_TOKEN_VALIDITY = 60; // 5 * 60 * 60;
 
 	public static final long JWT_REFRESH_TOKEN_VALIDITY = 7 * 24 * 60 * 60;
 
@@ -30,28 +30,23 @@ public class JwtTokenUtil implements Serializable {
 	private String secretRefresh;
 
 	public String getUsernameFromToken(String token) {
-		return getClaimFromToken(token, Claims::getSubject);
+		return getClaimFromToken(token, this.secret, Claims::getSubject);
 	}
 
 	public String getUsernameFromRefreshToken(String token) {
-		return getClaimFromRefreshToken(token, Claims::getSubject);
+		return getClaimFromToken(token, this.secretRefresh, Claims::getSubject);
 	}
 
 	public Date getExpirationDateFromToken(String token) {
-		return this.getClaimFromToken(token, Claims::getExpiration);
+		return this.getClaimFromToken(token, this.secret, Claims::getExpiration);
 	}
-	
+
 	public Date getExpirationDateFromRefreshToken(String token) {
-		return this.getClaimFromRefreshToken(token, Claims::getExpiration);
+		return this.getClaimFromToken(token, this.secretRefresh, Claims::getExpiration);
 	}
 
-	public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
-		Claims claims = this.getAllClaimsFromToken(token);
-		return claimsResolver.apply(claims);
-	}
-
-	public <T> T getClaimFromRefreshToken(String token, Function<Claims, T> claimsResolver) {
-		Claims claims = this.getAllClaimsFromRefreshToken(token);
+	public <T> T getClaimFromToken(String token, String secret, Function<Claims, T> claimsResolver) {
+		Claims claims = this.getAllClaimsFromToken(token, secret);
 		return claimsResolver.apply(claims);
 	}
 
@@ -64,12 +59,8 @@ public class JwtTokenUtil implements Serializable {
 		return this.doGenerateRefreshToken(userDetails.getUsername());
 	}
 
-	private Claims getAllClaimsFromToken(String token) {
+	private Claims getAllClaimsFromToken(String token, String secret) {
 		return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
-	}
-
-	private Claims getAllClaimsFromRefreshToken(String token) {
-		return Jwts.parser().setSigningKey(secretRefresh).parseClaimsJws(token).getBody();
 	}
 
 	public Boolean validateToken(String token, UserDetails userDetails) {
@@ -77,13 +68,13 @@ public class JwtTokenUtil implements Serializable {
 
 		return userDetails.getUsername().equals(userName) && !this.isTokenExpired(token);
 	}
-	
+
 	public Boolean validateRefreshToken(String token, UserDetails userDetails) {
 		String userName = this.getUsernameFromRefreshToken(token);
 
 		return userDetails.getUsername().equals(userName) && !this.isRefreshTokenExpired(token);
 	}
-	
+
 	private boolean isRefreshTokenExpired(String token) {
 		Date date = this.getExpirationDateFromRefreshToken(token);
 		return date.before(new Date());
