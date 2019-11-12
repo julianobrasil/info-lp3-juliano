@@ -21,10 +21,6 @@ public class ControllerUsuario {
 	@Autowired
 	UsuarioService usuarioService;
 
-	@GetMapping("/authenticate")
-	public void authenticate() {
-	}
-
 	@GetMapping
 	public List<Usuario> carregaTodosOsUsuarios(@RequestParam("nome") String nome) {
 

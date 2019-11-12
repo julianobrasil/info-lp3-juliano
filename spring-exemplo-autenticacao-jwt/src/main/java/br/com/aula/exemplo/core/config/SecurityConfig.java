@@ -13,7 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import br.com.aula.exemplo.controller.to.JwtRequestFilter;
+import br.com.aula.exemplo.core.config.jwt.JwtAuthenticationEntryPoint;
+import br.com.aula.exemplo.core.config.jwt.JwtRequestFilter;
+import br.com.aula.exemplo.core.config.jwt.JwtUserDetailsService;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

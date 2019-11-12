@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.aula.exemplo.controller.to.JwtRequest;
 import br.com.aula.exemplo.controller.to.JwtResponse;
-import br.com.aula.exemplo.core.config.JwtTokenUtil;
-import br.com.aula.exemplo.core.config.JwtUserDetailsService;
+import br.com.aula.exemplo.core.config.jwt.JwtTokenUtil;
+import br.com.aula.exemplo.core.config.jwt.JwtUserDetailsService;
 
 @RestController
 @CrossOrigin

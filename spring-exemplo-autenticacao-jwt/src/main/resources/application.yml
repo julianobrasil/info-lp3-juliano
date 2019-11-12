@@ -2,7 +2,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://prof:abcdef12!@ds335678.mlab.com:35678/lp3?connectTimeoutMS=300000
-      
+
 jwt:
   secret: javainuse
 

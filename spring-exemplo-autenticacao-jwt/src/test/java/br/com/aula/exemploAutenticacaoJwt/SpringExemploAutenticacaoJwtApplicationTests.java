@@ -1,4 +1,4 @@
-package br.com.aula.exemplo;
+package br.com.aula.exemploAutenticacaoJwt;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringExemploApplicationTests {
+public class SpringExemploAutenticacaoJwtApplicationTests {
 
 	@Test
 	public void contextLoads() {

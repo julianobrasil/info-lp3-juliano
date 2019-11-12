@@ -38,6 +38,13 @@
 		</dependency>
 		<!-- SPRING SECURITY -->
 
+		<!-- SPRING CACHE -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<!-- SPRING CACHE -->
+
 		<!-- SPRING DATA + MONGODB -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

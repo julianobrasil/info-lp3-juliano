@@ -1,4 +1,4 @@
-package br.com.aula.exemplo.core.config;
+package br.com.aula.exemplo.core.config.jwt;
 
 import java.io.IOException;
 
