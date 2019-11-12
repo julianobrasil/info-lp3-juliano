@@ -19,51 +19,51 @@ import br.com.aula.exemplo.core.config.jwt.JwtUserDetailsService;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-		@Autowired
-		private JwtUserDetailsService jwtUserDetailsService;
+	@Autowired
+	private JwtUserDetailsService jwtUserDetailsService;
 
-		@Autowired
-		private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-		
-		@Autowired
-		private JwtRequestFilter jwtRequestFilter;
+	@Autowired
+	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-		@Override
-		protected void configure(HttpSecurity http) throws Exception {
-				// @formatter:off
-    		http
-    			.csrf()
-    				.disable()
-    			.authorizeRequests()
-    				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-    				.antMatchers("/authenticate").permitAll()
-    				.anyRequest().authenticated()
-    			.and()
-    				.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-    			.and()
-    				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    		// @formatter:on
-    		
-    		http.addFilterBefore(this.jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-		}
+	@Autowired
+	private JwtRequestFilter jwtRequestFilter;
 
-		@Override
-		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-			// @formatter:off
-    	auth
-    		.userDetailsService(this.jwtUserDetailsService)
-    		.passwordEncoder(this.passwordEncoder());
-    	// @formatter:on
-		}
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		// @formatter:off
+		http
+			.csrf()
+				.disable()
+			.authorizeRequests()
+				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+				.antMatchers("/authenticate","/refresh").permitAll()
+				.anyRequest().authenticated()
+			.and()
+				.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+			.and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		// @formatter:on
 
-		@Bean
-		public PasswordEncoder passwordEncoder() {
-				return new BCryptPasswordEncoder();
-		}
+		http.addFilterBefore(this.jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+	}
 
-		@Bean
-		@Override
-		public AuthenticationManager authenticationManagerBean() throws Exception {
-				return super.authenticationManagerBean();
-		}
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// @formatter:off
+		auth
+			.userDetailsService(this.jwtUserDetailsService)
+			.passwordEncoder(this.passwordEncoder());
+		// @formatter:on
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
 }

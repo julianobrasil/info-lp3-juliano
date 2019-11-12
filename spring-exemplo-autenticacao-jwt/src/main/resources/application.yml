@@ -5,6 +5,7 @@ spring:
 
 jwt:
   secret: javainuse
+  secret-refresh: alsojavainiuse
 
 logging:
   level:

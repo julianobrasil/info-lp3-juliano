@@ -1,5 +1,7 @@
 package br.com.aula.exemplo.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,6 +10,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +40,40 @@ public class JwtAuthenticationController {
 
 		String token = this.jwtTokenUtil.generateToken(userDetails);
 
-		return ResponseEntity.ok(JwtResponse.builder().token(token).build());
+		String refreshToken = this.jwtTokenUtil.generateRefreshToken(userDetails);
+
+		return ResponseEntity.ok(JwtResponse.builder().token(token).refreshToken(refreshToken).build());
+	}
+
+	@GetMapping("/refresh")
+	public ResponseEntity<?> refreshAuthenticationToken(HttpServletRequest request) throws Exception {
+		String token = request.getHeader("Authorization");
+		if (token != null && token.startsWith("Bearer ")) {
+			token = token.substring(7);
+		} else {
+			throw new Exception("Invalid token");
+		}
+
+		String refreshToken = request.getHeader("Refresh-token");
+		if (refreshToken == null) {
+			throw new Exception("No refresh token was found");
+		}
+
+		String username = this.jwtTokenUtil.getUsernameFromToken(token);
+
+		if (username == null) {
+			throw new Exception("Invalid user");
+		}
+
+		UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
+
+		if (!this.jwtTokenUtil.validateRefreshToken(refreshToken, userDetails)) {
+			throw new Exception("Invalid refresh token");
+		}
+
+		token = this.jwtTokenUtil.generateToken(userDetails);
+
+		return ResponseEntity.ok(JwtResponse.builder().token(token).refreshToken(refreshToken).build());
 	}
 
 	private void authenticate(String username, String password) throws Exception {
