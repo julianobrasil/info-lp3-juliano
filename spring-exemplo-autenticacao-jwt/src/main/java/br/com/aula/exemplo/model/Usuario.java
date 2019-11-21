@@ -2,6 +2,8 @@ package br.com.aula.exemplo.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,4 +20,7 @@ import lombok.NoArgsConstructor;
 public class Usuario extends AbstractDocument {
 	private String nome;
 	private String email;
+	
+	@JsonIgnore
+	private String senha;
 }

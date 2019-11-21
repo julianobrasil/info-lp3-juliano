@@ -30,4 +30,12 @@ public interface UsuarioService {
 	 */
 	List<Usuario> findAllUsuarios(String nome);
 
+	/**
+	 * Busca um usuário pelo seu e-mail
+	 * 
+	 * @param username
+	 * @return
+	 */
+	Usuario findByEmail(String username);
+
 }

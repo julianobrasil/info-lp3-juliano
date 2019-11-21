@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import br.com.aula.exemplo.CacheUtils;
 
 @Component
-public class SheduledTasks {
+public class ScheduledTasks {
 
 		@Autowired
 		private CacheUtils cacheUtils;

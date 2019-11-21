@@ -8,4 +8,6 @@ import br.com.aula.exemplo.model.Usuario;
 
 public interface UsuarioRepository extends MongoRepository<Usuario, String> {
 	List<Usuario> findByNomeContainsIgnoreCase(String parteDoNome);
+
+	Usuario findByEmail(String email);
 }

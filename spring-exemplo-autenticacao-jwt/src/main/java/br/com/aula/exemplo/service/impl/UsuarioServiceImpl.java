@@ -3,6 +3,8 @@ package br.com.aula.exemplo.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.aula.exemplo.core.nosql.UsuarioRepository;
@@ -22,6 +24,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario criaUsuario(Usuario usuario) {
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 		usuario = this.usuarioRepository.save(usuario);
 		return usuario;
 	}
@@ -32,6 +36,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 				: this.usuarioRepository.findByNomeContainsIgnoreCase(nome);
 
 		return usuarios;
+	}
+
+	@Override
+	public Usuario findByEmail(String username) {
+
+		return this.usuarioRepository.findByEmail(username);
 	}
 
 }
