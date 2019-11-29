@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-content>
+    <app-usuario-form [formControl]="_usuarioCtrl"></app-usuario-form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="_gravaUsuario()"
+            [disabled]="!_usuarioCtrl?.valid"
+            type="button"
+            mat-button>
+      Gravar
+    </button>
+    <button (click)="_usuarioCtrl?.reset()"
+            color="warn"
+            mat-button>
+      Cancelar
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card>
+  <mat-card-content>
+    <app-usuario-list (remove)="removed.emit($event)"
+                      (edita)="_editaUsuario($event)"
+                      [usuarios]="usuarios">
+    </app-usuario-list>
+  </mat-card-content>
+</mat-card>

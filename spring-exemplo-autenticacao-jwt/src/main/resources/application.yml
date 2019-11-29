@@ -1,7 +1,8 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://prof:abcdef12!@ds335678.mlab.com:35678/lp3?connectTimeoutMS=300000
+      uri: mongodb+srv://jpavel:iLGzKWVm8RaQ4rx@jpavel-cluster-7nxiw.mongodb.net/my-data-base?retryWrites=true&w=majority
+#      uri: mongodb://prof:abcdef12!@ds335678.mlab.com:35678/lp3?connectTimeoutMS=300000
 
 jwt:
   secret: javainuse

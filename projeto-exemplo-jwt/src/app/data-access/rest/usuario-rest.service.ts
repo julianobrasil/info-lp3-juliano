@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Usuario} from '../model';
 import {Observable} from 'rxjs';
+import {CriaUsuarioRequest} from './to/cria-usuario-request';
 
 @Injectable({providedIn: 'root'})
 export class UsuarioRestService {
@@ -11,13 +12,13 @@ export class UsuarioRestService {
   /**
    * Grava ou cria um usuário
    */
-  gravaUsuario(usuario: Usuario): Observable<Usuario> {
+  gravaUsuario(usuario: Usuario | CriaUsuarioRequest): Observable<Usuario> {
     const url = this._baseUrl + '/api/usuario';
 
-    if (usuario.id) {
+    if (usuario.hasOwnProperty('id')) {
       return this._http.put<Usuario>(url, usuario);
     } else {
-      return this._http.post<Usuario>(url, usuario);
+      return this._http.post<CriaUsuarioRequest>(`${url}/novo`, usuario);
     }
   }
 

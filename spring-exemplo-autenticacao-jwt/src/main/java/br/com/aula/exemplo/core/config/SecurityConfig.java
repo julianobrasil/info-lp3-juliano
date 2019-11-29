@@ -3,6 +3,7 @@ package br.com.aula.exemplo.core.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -37,13 +38,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable()
 			.authorizeRequests()
 				.antMatchers("/authenticate","/refresh").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/usuario/novo").permitAll()
 				.anyRequest().authenticated()
 			.and()
 				.exceptionHandling().authenticationEntryPoint(this.jwtAuthenticationEntryPoint)
 			.and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		// @formatter:on
-		
+
 		http.cors();
 
 		http.addFilterBefore(this.jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
