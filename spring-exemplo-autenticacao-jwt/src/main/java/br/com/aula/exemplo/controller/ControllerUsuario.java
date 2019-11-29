@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.aula.exemplo.controller.to.CriaUsuarioRequest;
 import br.com.aula.exemplo.model.Usuario;
 import br.com.aula.exemplo.service.UsuarioService;
 
@@ -27,10 +28,11 @@ public class ControllerUsuario {
 		return this.usuarioService.findAllUsuarios(nome);
 	}
 
-	@PostMapping
-	public Usuario gravaUsuario(@RequestBody Usuario usuario) {
+	@PostMapping("/novo")
+	public Usuario gravaUsuario(@RequestBody CriaUsuarioRequest usuarioRequest) {
 
-		usuario = this.usuarioService.criaUsuario(usuario);
+		Usuario usuario = this.usuarioService.criaUsuario(usuarioRequest.getNome(), usuarioRequest.getEmail(),
+				usuarioRequest.getSenha());
 
 		return usuario;
 	}

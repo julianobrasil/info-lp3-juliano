@@ -1,0 +1,13 @@
+<div class="usuario-list-container">
+  <div *ngFor="let usuario of usuarios"
+       class="row mat-elevation-z4">
+    <section class="nome">{{usuario?.name}}</section>
+    <section class="email">{{usuario?.username}}</section>
+    <section class="ativo">
+      {{usuario?.ativo ? 'ATIVO' : 'INATIVO'}}
+    </section>
+    <section class="acoes">
+        <app-usuario-list-menu></app-usuario-list-menu>
+    </section>
+  </div>
+</div>

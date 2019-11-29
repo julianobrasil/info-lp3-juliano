@@ -26,9 +26,11 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 		Usuario usuario = this.usuarioService.findByEmail(username);
 
-		if ("javainuse".equals(username)) {
+		if (usuario != null) {
 			return new User(usuario.getEmail(), usuario.getSenha(), new ArrayList<>());
-			// return new User("javainuse", "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6", new ArrayList<>());
+			// return new User("javainuse",
+			// "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6", new
+			// ArrayList<>());
 		} else {
 			throw new UsernameNotFoundException("User wasn't found");
 		}

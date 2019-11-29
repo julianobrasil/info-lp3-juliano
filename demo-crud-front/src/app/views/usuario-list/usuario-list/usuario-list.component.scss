@@ -1,0 +1,29 @@
+.usuario-list-container {
+    width: 100%;
+
+    .row {
+        display: flex;
+        align-items: center;
+
+        &>* {
+            box-sizing: border-box;
+            margin: 5px 10px;
+        }
+
+        .nome {
+            flex: 4;
+        }
+
+        .email{
+            flex: 4;
+        }
+
+        .ativo {
+            flex: 4;
+        }
+
+        .acao {
+            width: 40px;
+        }
+    }
+}

@@ -1,0 +1,13 @@
+.usuario-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &>*:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  mat-checkbox {
+    align-self: flex-start;
+  }
+}

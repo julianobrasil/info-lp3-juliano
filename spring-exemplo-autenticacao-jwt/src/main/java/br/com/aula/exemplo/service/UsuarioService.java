@@ -21,7 +21,7 @@ public interface UsuarioService {
 	 * @param usuario
 	 * @return
 	 */
-	Usuario criaUsuario(Usuario usuario);
+	Usuario criaUsuario(String nome, String email, String senha);
 
 	/**
 	 * Encontra todos os usuários

@@ -8,10 +8,7 @@ import {LoginRoutingComponent} from './login-routing/login-routing.component';
 import {CustomMaterialModule} from './custom-material.module';
 
 @NgModule({
-  declarations: [
-    LoginRoutingComponent,
-    LoginComponent
-  ],
+  declarations: [LoginRoutingComponent, LoginComponent],
   imports: [
     /** ANGULAR IMPORTS */
     CommonModule,

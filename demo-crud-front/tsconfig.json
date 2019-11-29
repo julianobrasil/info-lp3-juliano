@@ -1,0 +1,44 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "paths": {
+      "~views/shell/*": [
+        "src/app/views/shell/*"
+      ],
+      "~views/usuario/*": [
+        "src/app/views/usuario/*",
+        "src/app/views/usuario-form/*",
+        "src/app/views/usuario-list/*",
+        "src/app/views/usuario-list-menu/*",
+
+      ],
+      "~data-acess/domain/*": [
+        "src/app/data-access/domain/*"
+      ],
+      "~data-acess/rest/*": [
+        "src/app/data-access/rest/*"
+      ],
+    },
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
+}

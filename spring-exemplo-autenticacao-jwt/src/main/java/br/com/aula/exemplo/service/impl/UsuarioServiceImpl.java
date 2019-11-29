@@ -23,9 +23,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public Usuario criaUsuario(Usuario usuario) {
+	public Usuario criaUsuario(String nome, String email, String senha) {
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+		Usuario usuario = Usuario.builder().nome(nome).senha(passwordEncoder.encode(senha)).email(email).build();
 		usuario = this.usuarioRepository.save(usuario);
 		return usuario;
 	}

@@ -9,11 +9,12 @@ export class SecurityInterceptor implements HttpInterceptor {
   constructor(private _appService: AppService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authReq = req.url.includes('/authenticate')
-      ? req
-      : req.clone({
-          headers: req.headers.set('Authorization', 'Bearer ' + this._appService.token),
-        });
+    const authReq =
+      req.url.includes('/authenticate') || req.url.includes('/api/usuario/novo')
+        ? req
+        : req.clone({
+            headers: req.headers.set('Authorization', 'Bearer ' + this._appService.token),
+          });
 
     return next.handle(authReq);
   }
