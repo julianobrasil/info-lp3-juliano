@@ -19,4 +19,10 @@ public class CacheUtils {
 		
 		@CacheEvict(value = "userDetailsCachingStore", allEntries = true)
 		public void evictAll() {}
+		
+		public void evictCachedUserFromAuthentication(String username) {
+			Cache cache = cacheManager.getCache("userDetailsCachingStore");
+			
+			cache.evict(username);
+		}
 }

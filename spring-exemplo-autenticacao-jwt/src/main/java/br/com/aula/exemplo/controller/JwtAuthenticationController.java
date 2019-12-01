@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.aula.exemplo.CacheUtils;
 import br.com.aula.exemplo.controller.to.JwtRequest;
 import br.com.aula.exemplo.controller.to.JwtResponse;
 import br.com.aula.exemplo.core.config.jwt.JwtTokenUtil;
@@ -33,8 +34,15 @@ public class JwtAuthenticationController {
 	@Autowired
 	private JwtUserDetailsService jwtUserDetailsService;
 
+	@Autowired
+	private CacheUtils cacheUtils;
+
 	@PostMapping("/authenticate")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest request) throws Exception {
+		// Caso o usuário esteja em cache, será retirado antes da autenticação para o
+		// que o método loadUserByUsername possa funcionar corretamente
+		this.cacheUtils.evictCachedUserFromAuthentication(request.getUsername());
+
 		this.authenticate(request.getUsername(), request.getPassword());
 
 		final UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(request.getUsername());
@@ -61,7 +69,7 @@ public class JwtAuthenticationController {
 		}
 
 		String username = null;
-		
+
 		try {
 			username = this.jwtTokenUtil.getUsernameFromToken(token);
 		} catch (ExpiredJwtException e) {
