@@ -1,0 +1,4 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://n3:123456!@#$%@cluster0-cklw5.mongodb.match/caes?

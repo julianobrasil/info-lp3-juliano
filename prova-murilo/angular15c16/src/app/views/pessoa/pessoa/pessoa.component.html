@@ -1,0 +1,24 @@
+<mat-card>
+    <mat-card-content>
+      <app-pessoa-form [formControl]="_pessoaFCtrl"></app-pessoa-form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button class="mat-primary"
+              (click)="_gravaPessoa()"
+              type="button"
+              mat-button>
+        Gravar
+      </button>
+      <button color="warn"
+              mat-button>
+        Cancelar
+      </button>
+    </mat-card-actions>
+</mat-card>
+  
+  <mat-card>
+    <mat-card-content>
+      <app-pessoa-list [pessoas]="pessoas">
+      </app-pessoa-list>
+    </mat-card-content>
+  </mat-card>

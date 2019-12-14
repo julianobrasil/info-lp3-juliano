@@ -1,0 +1,21 @@
+package com.c16.n3.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.c16.n3.core.model.domain.Pessoa;
+import com.c16.n3.core.repository.PessoaRepository;
+
+public class PessoaServiceImpl {
+	@Autowireded
+	private PessoaRepository pessoaRepository;
+
+	@Override
+	public List<Usuario> findAllPessoas() {
+		return this.pessoaRepository.findAll();
+	}
+
+	@Override
+	public Pessoa savePessoa(Pessoa pessoa) {
+		return this.pessoaRepository.save(pessoa);
+	}
+}

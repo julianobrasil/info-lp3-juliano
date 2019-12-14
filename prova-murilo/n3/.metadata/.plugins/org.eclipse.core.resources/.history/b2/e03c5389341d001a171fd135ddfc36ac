@@ -1,0 +1,14 @@
+package com.c16.n3.service;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Document(collection = "usuario")
+public interface service {
+	List<Usuario> findAllUsers();
+
+	Usuario saveUsuario(Usuario usuario);
+
+	void removeUsuario(String id);
+}

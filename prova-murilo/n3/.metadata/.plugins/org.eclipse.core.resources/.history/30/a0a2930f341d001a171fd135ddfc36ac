@@ -1,0 +1,11 @@
+package com.c16.n3.core.model.domain;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Document(collection = "Pessoa")
+public class Pessoa {
+	private String Nome;
+	private String Animal;
+}

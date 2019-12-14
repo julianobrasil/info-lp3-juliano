@@ -1,0 +1,27 @@
+package com.c16.n3.controller;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/pessoa")
+@CrossOrigin
+public class PessoaController {
+	@Autowired
+	private PessoaService usuarioService;
+
+	@GetMapping
+	public List<Usuario> findAllUsers() {
+		return this.usuarioService.findAllUsers();
+	}
+
+	@PostMapping
+	public Usuario gravaUsuario(@RequestBody Usuario usuario) {
+		return this.usuarioService.saveUsuario(usuario);
+	}
+
+	@DeleteMapping("/{id}")
+	public Boolean gravaUsuario(@PathVariable("id") String id) {
+		this.usuarioService.removeUsuario(id);
+		return true;
+	}
+}
