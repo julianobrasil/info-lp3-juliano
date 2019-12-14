@@ -1,0 +1,10 @@
+package com.c16.n3.core.model.domain;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Document(collection = "usuario")
+public class Pessoa {
+
+}

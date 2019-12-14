@@ -1,0 +1,5 @@
+package com.c16.n3.core.model.domain;
+
+public class Pessoa {
+
+}
