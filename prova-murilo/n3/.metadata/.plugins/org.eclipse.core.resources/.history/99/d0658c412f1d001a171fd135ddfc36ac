@@ -1,0 +1,9 @@
+package com.c16.n3.repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.example.demo.core.model.domain.Usuario;
+
+public interface PessoaRepository extends MongoRepository<Pessoa, String> {
+
+}

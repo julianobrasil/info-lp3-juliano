@@ -1,0 +1,43 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "paths": {
+      "~views/shell/*": [
+        "src/app/views/shell/*"
+      ],
+      "~views/pessoa/*": [
+        "src/app/views/presentational/pessoa/*",
+        "src/app/views/presentational/pessoa-form/*",
+        "src/app/views/presentational/pessoa-list/*",
+        "src/app/views/container/pessoa-container/*"
+      ],
+      "~data-access/domain/*": [
+        "src/app/data-access/domain/*"
+      ],
+      "~data-access/rest/*": [
+        "src/app/data-access/rest/*"
+      ],
+    },
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
+}

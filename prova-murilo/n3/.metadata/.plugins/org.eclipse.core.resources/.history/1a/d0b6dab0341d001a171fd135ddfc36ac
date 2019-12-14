@@ -1,0 +1,7 @@
+ackage com.c16.n3.service;
+
+public interface PessoaService {
+	List<Pessoa> findAllUsers();
+
+	Usuario savePessoa(Pessoa pessoa);
+}

@@ -1,0 +1,9 @@
+package com.c16.n3.service;
+
+public interface service {
+	List<Usuario> findAllUsers();
+
+	Pessoa savePessoa(Pessoa pessoa);
+
+	void removeUsuario(String id);
+}

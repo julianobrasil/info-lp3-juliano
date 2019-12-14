@@ -1,0 +1,8 @@
+package com.c16.n3.controller;
+
+@RestController
+@RequestMapping("/api/usuario")
+@CrossOrigin
+public class PessoaController {
+
+}
